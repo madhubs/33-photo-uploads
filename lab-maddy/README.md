@@ -51,6 +51,9 @@ let mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(LandingContainer);
 ```
 
+#### ADDITIONS FOR LAB 33- photo upload
+- added profile-actions.js in frontend/src/action
+- added imports to src/component/app
 
 ## Learning Objectives
 * We will be able to manage basic and bearer auth on the client side

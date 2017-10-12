@@ -1,28 +1,35 @@
 
-import React from 'react'
-import Navbar from '../navbar'
-import {Provider} from 'react-redux'
-import LandingContainer from '../landing-container'
-import {BrowserRouter, Route} from 'react-router-dom'
-import appStoreCreate from '../../lib/app-create-store'
+import React from 'react';
+import Navbar from '../navbar';
+import {connect} from 'react-redux';
+import * as utils from '../../lib/utils';
+import {tokenSet} from '../../action/auth-actions';
+import LandingContainer from '../landing-container';
+import {BrowserRouter, Route} from 'react-router-dom';
+import SettingsContainer from '../settings-container';
+import DashboardContainer from '../dashboard-container';
 
-let store = appStoreCreate()
 
 class App extends React.Component {
+  componentDidMount() {
+    let token = utils.cookieFetch('X-Sluggram-token');
+    if(token) this.props.tokenSet(token);
+  }
+
   render() {
     return (
       <div className="application">
-        <Provider store={store}>
           <BrowserRouter>
             <div>
               <Navbar />
-              {<Route path="/welcome/:auth" component={LandingContainer}/>}
+              <Route path="/settings" component={SettingsContainer}/>
+              <Route path="/welcome/:auth" component={LandingContainer}/>}
+              <Route exact path="/dashboard" component={DashboardContainer}/>
             </div>
           </BrowserRouter>
-        </Provider>
       </div>
-    )
+    );
   }
 }
 
-export default App
+export default App;
