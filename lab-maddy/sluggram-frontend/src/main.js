@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import App from './component/app';
-import {provider} from 'react-redux';
+import {Provider} from 'react-redux';
 import appCreateStore from './lib/app-create-store';
 
 let store = appCreateStore();

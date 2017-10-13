@@ -1,3 +1,4 @@
+
 import React from 'react';
 import AuthForm from '../auth-form';
 import {connect} from 'react-redux';
@@ -13,26 +14,23 @@ class LandingContainer extends React.Component {
 
     let redirect = path => this.props.history.replace(path);
 
-//REFORMATTED
     return (
-       <div>
-          <h2>hello world from landing!</h2> :
-          <AuthForm
+      <div>
+        <h2>hello world from landing!</h2>
+        <AuthForm
           auth={params.auth}
           redirect={redirect}
           onComplete={handleComplete}/>
-       </div>
+      </div>
     );
   }
 }
 
-//added on 10/11 before starting on lab 33
 let mapStateToProps = () => ({});
-
 let mapDispatchToProps = dispatch => ({
   signup: user => dispatch(signupRequest(user)),
   login: user => dispatch(loginRequest(user)),
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(LandingContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(LandingContainer)

@@ -1,12 +1,17 @@
 import superagent from 'superagent';
 
 export const profileSet = profile => ({
-  type: 'PROFILE_CREATE',
+  type: 'PROFILE_SET',
   payload: profile,
 });
 
 export const profileCreate = profile => ({
   type: 'PROFILE_CREATE',
+  payload: profile,
+});
+
+export const profileUpdate = profile => ({
+  type: 'PROFILE_UPDATE',
   payload: profile,
 });
 
@@ -22,6 +27,7 @@ export const profileFetchRequest = () => (dispatch, getState) => {
 
 export const profileCreateRequest = profile => (dispatch, getState) => {
   let {auth} = getState();
+  console.log('helloooo');
   return superagent.post(`${__API_URL__}/profiles`)
   .set('Authorization', `Bearer ${auth}`)
   .field('bio', profile.bio)
