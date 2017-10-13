@@ -3,7 +3,7 @@ import React from 'react';
 import Navbar from '../navbar';
 import {connect} from 'react-redux';
 import * as utils from '../../lib/utils';
-import {tokenSet} from '../../action/auth-actions';
+import {tokenSet} from '../../action/auth-action';
 import LandingContainer from '../landing-container';
 import {BrowserRouter, Route} from 'react-router-dom';
 import SettingsContainer from '../settings-container';
