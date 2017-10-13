@@ -12,7 +12,7 @@ import DashboardContainer from '../dashboard-container';
 
 class App extends React.Component {
   componentDidMount() {
-    let token = utils.cookieFetch('X-Sluggram-token');
+    let token = utils.cookieFetch('X-Sluggram-Token');
     if(token) this.props.tokenSet(token);
   }
 
@@ -23,7 +23,7 @@ class App extends React.Component {
             <div>
               <Navbar />
               <Route path="/settings" component={SettingsContainer}/>
-              <Route path="/welcome/:auth" component={LandingContainer}/>}
+              <Route path="/welcome/:auth" component={LandingContainer}/>
               <Route exact path="/dashboard" component={DashboardContainer}/>
             </div>
           </BrowserRouter>

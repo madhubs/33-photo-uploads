@@ -11,20 +11,20 @@ export const clearLocalStorageToken = () => localStorage.removeItem('token');
 export const cookieDelete = key => document.cookie = `${key}=; expires= Thu, 01 Jan 1970 00:00:00 GMT`;
 
 export const cookieFetch = key => {
-  let cookies = Object.assign(...document.cookie.split(';'))
+  let cookies = Object.assign(...document.cookie.split(';')
     .map(cookie => {
-      let [k, value] = cookie.split('=');
-      return { [k.trim()]: value };
-    });
+      let [key, value] = cookie.split('=');
+      return { [key.trim()]: value };
+    }));
   return cookies[key];
 };
 
 export const cookieFetchAll = () => {
-  return Object.assign(...document.cookie.split(';'))
+  return Object.assign(...document.cookie.split(';')
     .map(cookie => {
       let [key, value] = cookie.split('=');
       return { [key.trim()]: value };
-    });
+    }));
 };
 
 export const photoToDataUrl = file => {
