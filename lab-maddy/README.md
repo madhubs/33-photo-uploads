@@ -52,7 +52,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(LandingContainer);
 ```
 
 #### ADDITIONS FOR LAB 33- photo upload
-- added profile-actions.js in frontend/src/action
+- added profile-action.js in frontend/src/action
 - added imports to src/component/app
 
 ## Learning Objectives
