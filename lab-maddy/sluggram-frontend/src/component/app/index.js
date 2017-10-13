@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import * as utils from '../../lib/utils';
 import {tokenSet} from '../../action/auth-action';
 import LandingContainer from '../landing-container';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {BrowserRouter, Route, Redirect} from 'react-router-dom';
 import SettingsContainer from '../settings-container';
 import DashboardContainer from '../dashboard-container';
 
@@ -25,6 +25,7 @@ class App extends React.Component {
               <Route path="/settings" component={SettingsContainer}/>
               <Route path="/welcome/:auth" component={LandingContainer}/>
               <Route exact path="/dashboard" component={DashboardContainer}/>
+              {/* <FooterContainer /> */}
             </div>
           </BrowserRouter>
       </div>
@@ -32,4 +33,13 @@ class App extends React.Component {
   }
 }
 
-export default App;
+let mapStateToProps = state => ({
+  auth: state.auth,
+  profile: state.profile,
+});
+
+let mapDispatchToProps = dispatch => ({
+  tokenSet: token => dispatch(tokenSet(token)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

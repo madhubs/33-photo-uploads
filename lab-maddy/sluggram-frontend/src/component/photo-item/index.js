@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import PhotoForm from '../photo/-form';
+import PhotoForm from '../photo-form';
 import * as utils from '../../lib/utils';
 import {GridTile} from 'material-ui/GridList';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
