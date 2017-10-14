@@ -2,7 +2,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {tokenDelete} from '../../action/auth-action';
+import {tokenDeleteRequest} from '../../action/auth-action';
 
 class Navbar extends React.Component {
   render() {
@@ -43,7 +43,7 @@ let mapStateToProps = state => ({
 });
 
 let mapDispatchToProps = dispatch => ({
-  tokenDelete: () => dispatch(tokenDelete()),
+  tokenDelete: () => dispatch(tokenDeleteRequest()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
