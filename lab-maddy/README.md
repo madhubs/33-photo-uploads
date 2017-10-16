@@ -1,6 +1,10 @@
 ![cf](https://i.imgur.com/7v5ASc8.png) 32: Authentication and Authorization
 ======
 
+#### Scripts to remember:
+
+mongod --dbpath ./db
+
 #### Additions for Auth:
 
 I added this chunk of code to the landing-container/index.js file:
