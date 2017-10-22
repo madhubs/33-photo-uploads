@@ -1,6 +1,6 @@
-import createError from 'http-errors';
-import * as util from '../lib/util.js';
-import Mongoose, {Schema} from 'mongoose';
+import createError from 'http-errors'
+import * as util from '../lib/util.js'
+import Mongoose, {Schema} from 'mongoose'
 
 const profileScheama = new Schema({
   owner: {type: Schema.Types.ObjectId, required: true, unique: true},
@@ -8,28 +8,28 @@ const profileScheama = new Schema({
   username: {type: String, required: true},
   avatar: {type: String},
   bio: {type: String},
-});
+})
 
-const Profile = Mongoose.model('profile', profileScheama);
+const Profile = Mongoose.model('profile', profileScheama)
 
 Profile.validateReqFile = function (req) {
   if(req.files.length > 1){
     return util.removeMulterFiles(req.files)
     .then(() => {
-      throw createError(400, 'VALIDATION ERROR: only one file permited');
-    });
+      throw createError(400, 'VALIDATION ERROR: only one file permited')
+    })
   }
 
-  let [file] = req.files;
+  let [file] = req.files
   if(file)
     if(file.fieldname !== 'avatar')
-      return util.removeMulterFiles(req.files)
+    return util.removeMulterFiles(req.files)
     .then(() => {
-      throw createError(400, 'VALIDATION ERROR: file must be for avatar');
-    });
+      throw createError(400, 'VALIDATION ERROR: file must be for avatar')
+    })
 
-  return Promise.resolve(file);
-};
+  return Promise.resolve(file)
+}
 
 Profile.createProfileWithPhoto = function(req){
   return Profile.validateReqFile(req)
@@ -42,19 +42,19 @@ Profile.createProfileWithPhoto = function(req){
         email: req.user.email,
         bio: req.body.bio,
         avatar: s3Data.Location,
-      }).save();
-    });
-  });
-};
+      }).save()
+    })
+  })
+}
 
 Profile.create = function(req){
   if(req.files){
     return Profile.createProfileWithPhoto(req)
     .then(profile => {
-      req.user.profile = profile._id;
+      req.user.profile = profile._id
       return req.user.save()
-      .then(() => profile);
-    });
+      .then(() => profile)
+    })
   }
 
   return new Profile({
@@ -65,49 +65,48 @@ Profile.create = function(req){
   })
   .save()
   .then(profile => {
-    req.user.profile = profile._id;
+    req.user.profile = profile._id
     return req.user.save()
-    .then(() => profile);
-  });
-};
+    .then(() => profile)
+  })
+}
 
-Profile.fetch = util.pagerCreate(Profile);
+Profile.fetch = util.pagerCreate(Profile)
 
 Profile.fetchOne = function(req){
   return Profile.findById(req.params.id)
   .then(profile => {
     if(!profile)
-      throw createError(404, 'NOT FOUND ERROR: profile not found');
-    return profile;
-  });
-};
+      throw createError(404, 'NOT FOUND ERROR: profile not found')
+    return profile
+  })
+}
 
 Profile.updateProfileWithPhoto = function(req) {
   return Profile.validateReqFile(req)
   .then(file => {
     return util.s3UploadMulterFileAndClean(file)
     .then((s3Data) => {
-      let update = {avatar: s3Data.Location};
-      if(req.body.bio) update.bio = req.body.bio;
-      return Profile.findByIdAndUpdate(req.params.id, update, {new: true, runValidators: true});
-    });
-  });
-};
+      let update = {avatar: s3Data.Location}
+      if(req.body.bio) update.bio = req.body.bio
+      return Profile.findByIdAndUpdate(req.params.id, update, {new: true, runValidators: true})
+    })
+  })
+}
 
 Profile.update = function(req){
   if(req.files && req.files[0])
-    return Profile.updateProfileWithPhoto(req);
-  let options = {new: true, runValidators: true};
-  return Profile.findByIdAndUpdate(req.params.id, {bio: req.body.bio}, options);
-};
+    return Profile.updateProfileWithPhoto(req)
+  let options = {new: true, runValidators: true}
+  return Profile.findByIdAndUpdate(req.params.id, {bio: req.body.bio}, options)
+}
 
 Profile.delete = function(req){
   return Profile.findOneAndRemove({_id: req.params.id, owner: req.user._id})
   .then(profile => {
     if(!profile)
-      throw createError(404, 'NOT FOUND ERROR: profile not found');
-    return util.s3DeletePhotoFromURL(profile.avatar);
-  });
-};
+      throw createError(404, 'NOT FOUND ERROR: profile not found')
+  })
+}
 
-export default Profile;
+export default Profile
