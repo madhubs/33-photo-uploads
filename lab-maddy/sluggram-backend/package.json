@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:slugbyte/sluggram.git",
-  "author": "Madeline Stevens",
+  "author": "Duncan Marsh <dwolfm@gmail.com>",
   "license": "MIT",
   "jest": {
     "verbose": true,
