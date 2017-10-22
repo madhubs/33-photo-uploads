@@ -50,11 +50,10 @@ export const photoUpdateRequest = photo => (dispatch, getState) => {
   .field('description', photo.description)
   .attach('photo', photo.photo)
   .then(res => {
-    dispatch(photoUpdate(res.body));
+    dispatch(photoUpdate(photo));
     return res;
   });
 };
-
 
 export const photoDeleteRequest = photo => (dispatch, getState) => {
   let {auth} = getState();
