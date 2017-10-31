@@ -15,6 +15,8 @@ An app that resembles instagram. With the ability to upload and update photos to
  * 3rd window/4: `mongo`
  * 4th window/4: `npm run start`
 
+ * to kill all from within mongo shell: `db.shutdownServer()` (thanks to Isaiah for the help with this one)
+
 
 
 #### Additions for Auth:
