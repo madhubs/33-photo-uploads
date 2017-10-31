@@ -3,36 +3,18 @@
 
 #### Project Description
 
-An app that resembles instagram. With the ability to upload and update photos to and from a database hosted on AWS S3.
+An app that resembles instagram. With the ability to upload and update photos to and from a bucket hosted on AWS S3.
 
 #### Scripts to remember:
 
 - Frontend:
- npm run watch
- ```
- 16:51 ~/codefellows/401/week8/33-photo-uploads/lab-maddy/sluggram-frontend [maddy-thur !] npm run watch
-
-> 36-d18@1.0.0 watch /Users/maddys87/codefellows/401/week8/33-photo-uploads/lab-maddy/sluggram-frontend
-> webpack-dev-server --inline --hot
-
-Project is running at http://localhost:8080/
-webpack output is served from /
-404s will fallback to /index.html
-Hash: db6a9ad8aa7518161cfb
-Version: webpack 3.6.0
-Time: 3672ms
-                         Asset       Size  Chunks                    Chunk Names
-bundle-db6a9ad8aa7518161cfb.js    1.93 MB       0  [emitted]  [big]  main
-                    index.html  353 bytes          [emitted]         
-   [1] ./node_modules/react/react.js 56 bytes {0} [built]
-  [90] (webpack)/hot/log.js 1.04 kB {0} [built]
- [153] (webpack)/hot/emitter.js 77 bytes {0} [built]
-
-```
-
+* 1st window/4 windows: Start the server `npm run watch`
 
 - Backend:
-mongod --dbpath ./db
+ * 2nd window/4: `mongod --dbpath './db'`
+ * 3rd window/4: `mongo`
+ * 4th window/4: `npm run start`
+
 
 
 #### Additions for Auth:

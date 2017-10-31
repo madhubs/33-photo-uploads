@@ -25,7 +25,7 @@ class PhotoItem extends React.Component {
     const styles = {
       gridList: {
         'min-width': '45%',
-        'position': 'relative',
+        'positiion': 'relative',
       },
       icons: {
         'position': 'absolute',
@@ -49,6 +49,7 @@ class PhotoItem extends React.Component {
         </div>
 
         {utils.renderIf(!this.state.editing, <img src={photo.url} style={{'width': '100%'}} />)}
+
         {utils.renderIf(this.state.editing,
           <PhotoForm
             buttonText="update"
