@@ -1,14 +1,13 @@
 {
   "name": "36-d18",
   "version": "1.0.0",
-  "description": "frontendstuff",
+  "description": "",
   "main": "webpack.config.js",
   "scripts": {
     "build": "webpack",
     "watch": "webpack-dev-server --inline --hot",
     "test": "jest",
-    "test:watch": "jest --watchAll",
-    "heroku-postbuild": "webpack -p --progress"
+    "test:watch": "jest --watchAll"
   },
   "jest": {
     "globals": {
@@ -22,9 +21,9 @@
     "coverageDirectory": "./coverage"
   },
   "keywords": [],
-  "author": "Madeline Stevens",
+  "author": "Code Fellows, LLC",
   "license": "MIT",
-  "dependencies": {
+  "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -48,9 +47,7 @@
     "superagent": "^3.6.0",
     "uglifyjs-webpack-plugin": "^0.4.6",
     "url-loader": "^0.5.9",
-    "webpack": "^3.5.6"
-  },
-  "devDependencies": {
-    "webpack-dev-server": "^2.9.1"
+    "webpack": "^3.5.6",
+    "webpack-dev-server": "^2.8.2"
   }
 }

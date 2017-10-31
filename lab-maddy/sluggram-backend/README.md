@@ -3,11 +3,11 @@ SLUGGRAM
 > a social photo platform REST API
 
 ## Configureation
-Create a `.env` file and configure it with the following enviroment variables 
+Create a `.env` file and configure it with the following enviroment variables
 ``` bash
-PORT=3000 
+PORT=3000
 DEBUG=true
-CORS_ORIGINS='<one or more cors orgins (space seporated)>' 
+CORS_ORIGINS='<one or more cors orgins (space seporated)>'
 MONGO_URI='<mongo uri>'
 SECRET='<random string>'
 AWS_ACCESS_KEY_ID='<a aws access key id>'
@@ -15,9 +15,9 @@ AWS_SECRET_ACCESS_KEY='<a aws secret access key>'
 AWS_BUCKET='<a aws bucket>'
 ```
 
-## Running Sluggam 
-* Start a mongodb `yarn db-on`
-* Start the server `yarn start`
+## Running Sluggam
+* Start a mongodb ``
+* 1st window/4 windows: Start the server `npm run watch`
 
 ## API Resources
 #### User Model
@@ -27,23 +27,23 @@ The user model is used in the backend strickly for authentication and authorizat
 * `email` - a unique string which stores the users email
 * `username` - a unique string that stores the users username
 * `passwordHash` - a string that holds a users hashed password
-* `tokenSeed` - a unique and random string used to genorate authorization tokens 
+* `tokenSeed` - a unique and random string used to genorate authorization tokens
 
 #### Profile Model
 Each user can have a single profile. Authorization is required for Creating, Updating, and Deleteing Profiles but they have public read access.  
 
 * `_id` - an unique database genorated string which uniqly identifys a profile  
-* `owner` - the user id of the profiles creator 
+* `owner` - the user id of the profiles creator
 * `email` - a unique string which stores the profiles email
 * `username` - a unique string that stores the profiles profilename
 * `avatar` - a string holding a URL to a profile photo
-* `bio` - a string holding a profiles bio 
+* `bio` - a string holding a profiles bio
 
 #### Photo Model
 Each user can have may photos. Authorization is required for Creating, Updating, and Deleteing Photos but they have public read access.
 
 * `_id` - an unique database genorated string which uniqly identifys a profile  
-* `owner` - the user id of the photos creator 
+* `owner` - the user id of the photos creator
 * `profile` - stores a the creators profile ID. the profile is populated on GET requests
 * `comments` - stores an array of comment IDs. the comments are populated on GET requests
 * `url` - a string which store a url to the photo
@@ -53,19 +53,19 @@ Each user can have may photos. Authorization is required for Creating, Updating,
 Each user can have many comments, and each photo can have may comments. Authorization is required for Creating, Updating, and Deleteing Comments but they have public read access.
 
 * `_id` - an unique database genorated string which uniqly identifys a profile  
-* `owner` - the user id of the photos creator 
+* `owner` - the user id of the photos creator
 * `profile` - stores a the creators profile ID. the profile is populated on GET requests
-* `photoID` - stores the photo id of the photo the comment is a response to 
+* `photoID` - stores the photo id of the photo the comment is a response to
 * `content` - a string with the users comment
 
-## Auth 
+## Auth
 Sluggram uses Basic authentication and Bearer authorization to enforce access controls. Basic and Bearer auth both use the HTTP `Authorization` header to pass credentials on a request.
 
 #### Basic Authentication
 Once a user account has been created Basic Authentication can be used to make a request on behalf of the account. To create a Basic Authorzation Header the client must base64 encode a string with the username and password seporated by a colon. Then the encoded string can then be appened to the string `'Basic '` and set to an `Authorization` header on an HTTP Request.    
 
 ``` javascript
-// Example of formating a Basic Authentication header in Javascript 
+// Example of formating a Basic Authentication header in Javascript
 let username = 'slugbyte'
 let password = 'abcd1234'
 
@@ -93,13 +93,13 @@ let headers = {
 #### POST `/signup`
 a HTTP POST request to /signup will create a new user account.
 
-###### request 
+###### request
 * Expected Headers
   * Content-Type: application/json
 * Request Body
   * JSON containing a username, email and password
 
-``` json 
+``` json
 {
   "username": "slugbyte",
   "email": "slugbyte@slugbyte.com",
@@ -110,38 +110,38 @@ a HTTP POST request to /signup will create a new user account.
 ###### response
 The response body will be a **bearer token**.
 
---- 
+---
 
 #### GET `/login`
 A HTTP GET request to /login will login (fetch a token) to an existing user account.
 
 ###### request
-* Expected Headers 
+* Expected Headers
   * Basic Authorization for the user account
 
-###### response 
+###### response
 The response body will be a **bearer token**.
 
 ## Profiles
 #### POST `/profiles`
-A HTTP POST request to /profiles will create a new profile. 
+A HTTP POST request to /profiles will create a new profile.
 
-###### request 
+###### request
 * Expected Headers
   * Bearer authorization
   * Content-Type: multipart/form-data
-* Expected Body 
+* Expected Body
   * a `bio` field containing string with the users bio
   * a `image` filed with the users avatar image
 
-###### response 
+###### response
 the response will be a JSON profile
 
 ---
 
 #### GET `/profiles`
 a HTTP GET request to /profiles will return an array of profiles
-###### request 
+###### request
 * Optional Query Paramiters
   * SEE PAGINATION
 
@@ -153,24 +153,24 @@ See pageination
 #### GET `/profiles/:id`
 a HTTP GET request to /profiles/:id  will return a profile
 ###### response
-the response will return a JSON profile 
+the response will return a JSON profile
 
 ---
 
 #### GET `/profiles/me`
 a HTTP GET request to /profiles/:id  will return a profile
-###### request 
+###### request
 * Expected Headers
   * Bearer authorization
 ###### response
-the response will return a users JSON profile 
+the response will return a users JSON profile
 
 
 ---
 
 #### PUT `/profiles/:id`
 a HTTP PUT request to /profiles/:id will update a profile
-###### request 
+###### request
 * Expected Headers
   * Bearer authorization
   * Content-Type: multipart/form-data or application/json
@@ -180,7 +180,7 @@ a HTTP PUT request to /profiles/:id will update a profile
   * an optional `bio` field containing string with the users bio
 
 ###### response
-the response will return a JSON profile 
+the response will return a JSON profile
 
 ---
 
@@ -193,24 +193,24 @@ a HTTP DELETE request to /profiles/:id will delete a profile
 ###### response
 the response will have no body and a status of **204**
 
-## Photos 
+## Photos
 #### POST `/photos`
 A HTTP POST request to /photos will create a new photo. A photo cannot be created until the User has created a profile.
 
-###### request 
+###### request
 * Expected Headers
   * Bearer authorization
   * Content-Type: multipart/form-data
-* Expected Body 
+* Expected Body
   * a `photo` filed with the file asset
   * a `description` field
 
-###### response 
+###### response
 the response will be a JSON photo
 
 #### GET `/photos`
 a HTTP GET request to /photos will return an array of photos
-###### request 
+###### request
 * Optional Query Paramiters
   * SEE PAGINATION
 
@@ -220,19 +220,19 @@ See pageination
 #### GET `/photos/:id`
 a HTTP GET request to /photos/:id  will return a photo
 ###### response
-the response will return a JSON profile 
+the response will return a JSON profile
 
 #### PUT `/photos/:id`
 a HTTP PUT request to /photos/:id will update a profile
 
-###### request 
+###### request
 * Expected Headers
   * Bearer authorization
   * Content-Type: multipart/form-data or application/json
 * Optional Body Fields
   * an optional `photo` filed with a replacement photo
     * photo uploads are only posible for Content-Type: multipart/form-data
-  * an optional `description` 
+  * an optional `description`
 
 #### DELETE `/photos/:id`
 a HTTP DELETE request to /photos/:id will delete a profile
