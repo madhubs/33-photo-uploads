@@ -15,9 +15,16 @@ AWS_SECRET_ACCESS_KEY='<a aws secret access key>'
 AWS_BUCKET='<a aws bucket>'
 ```
 
-## Running Sluggam
-* Start a mongodb ``
-* 1st window/4 windows: Start the server `npm run watch`
+
+
+## Running Sluggam:
+* start server: `npm run start`
+* to kill all from within mongo: `db.shutdownServer()`
+
+
+#### From Duncan:
+* Start a mongodb `yarn db-on`
+* Start the server '`yarn start`'
 
 ## API Resources
 #### User Model
